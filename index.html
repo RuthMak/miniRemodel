@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Home Remodel</title>
+</head>
+<body>
+        <h2>Mini Home Remodel Competition</h2>
+    
+        <h3>Enter Costs</h3>
+        <button onclick="addPaintAndSupplies(totalCost, updateTotals)">Add Paint and Supplies</button><br>
+        <button onclick="addFloorCoverings(totalCost, updateTotals)">Add Floor Coverings</button><br>
+        <button onclick="addFurniture(totalCost, updateTotals)">Add Furniture</button><br>
+    
+        <h3>Cost Breakdown</h3>
+        <p class="paint"></p>
+        <p class="floorCoverings"></p>
+        <p class="furniture"></p>
+    
+        <h3>Total Cost</h3>
+        <p class="totalCost">$ 0.00</p>
+    
+        <script>
+        
+        let totalCost = 0;
+        let paintCost = 0;
+        let floorCoveringsCost = 0;
+        let furnitureCost = 0;
+    
+    
+            // Function to add paint and supplies
+        function addPaintAndSupplies(totalCost, callback) {
+            let cost = prompt("Enter the cost for the paint and supplies:");
+    
+            cost = parseFloat(cost);
+    
+            if (cost > 100)
+                cost *= 1.1;
+
+            // Get a handle for the paint paragraph
+                
+            let paintArea = document.querySelector(".paint");
+            paintArea.innerHTML = `Paint $ ${cost.toFixed(2)}`;
+
+            callback();
+        }
+
+        // Function to add floor coverings
+        function addFloorCoverings(totalCost, callback) {
+            let cost = prompt("Enter the cost for floor coverings:");
+
+            cost = parseFloat(cost);
+
+            if (cost < 500)
+                cost *= 0.85;
+
+            let floorCoveringsArea = document.querySelector(".floorCoverings");
+            floorCoveringsArea.innerHTML = `Floor Coverings $ ${cost.toFixed(2)}`;
+
+            callback();
+        }
+
+        // Function to add furniture
+        function addFurniture(totalCost, callback) {
+            let cost = prompt("Enter the cost for furniture:");
+
+            cost = parseFloat(cost); 
+
+            if (cost < 500)
+                cost *= 0.9;
+
+            let furnitureArea = document.querySelector(".furniture");
+            furnitureArea.innerHTML = `Furniture $ ${cost.toFixed(2)}`;
+
+            callback();
+        }        
+
+        // Update the total cost 
+        const updateTotals = () => {
+            let paintCost = parseFloat(document.querySelector(".paint").textContent.split('$')[1]);
+            let floorCoveringsCost = parseFloat(document.querySelector(".floorCoverings").textContent.split('$')[1]);
+            let furnitureCost = parseFloat(document.querySelector(".furniture").textContent.split('$')[1]);
+            
+            let cost = paintCost + floorCoveringsCost + furnitureCost;
+            
+            let totalsArea = document.querySelector(".totalCost");
+            totalsArea.innerHTML = `Total $ ${cost.toFixed(2)}`;
+        }
+
+        </script>
+    
+</body>
+</html>
